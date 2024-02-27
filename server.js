@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import { autoRouter } from "./router.js";
+import { studentsRouter } from "./router.js";
 
 dotenv.config();
 const app = express();
@@ -12,9 +12,12 @@ const mongooseOptions = {
   useNewParser: true,
   unifiedTopology: true,
 };
+
+const baseUrl = "/api";
+
 app.use(cors());
 app.use(express.json());
-app.use("/api", autoRouter);
+app.use(`${baseUrl}`, studentsRouter);
 
 const startServer = async () => {
   mongoose.connect(DB_KEY);

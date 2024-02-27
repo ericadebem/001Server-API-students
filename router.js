@@ -1,16 +1,6 @@
-import mongoose from "mongoose";
+import express from "express";
+import { getStudent, postStudent, getAllStudents, deleteStudent, updateStudent } from "./controler.js";
+export const studentsRouter = express.Router();
 
-const StudentsSchema = new mongoose.Schema(
-  {
-    studentName: String,
-    email: String,
-    phone: Number,
-    stadt: String,
-  },
-  {
-    versionKey: false,
-    collection: "studentsAdd",
-  }
-);
-
-export const Students = mongoose.model("Students", StudentsSchema);
+studentsRouter.route("/:id").get(getStudent).delete(deleteStudent).patch(updateStudent);
+studentsRouter.route("/").post(postStudent).get(getAllStudents);
